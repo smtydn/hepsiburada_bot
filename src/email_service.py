@@ -1,8 +1,10 @@
+import os
 import smtplib
 from jinja2 import Template
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from settings import EMAIL_ADDRESS, EMAIL_PASSWORD, EMAIL_LIST
+from dotenv import load_dotenv
+load_dotenv()
 
 
 class EmailService:
@@ -14,9 +16,9 @@ class EmailService:
         with smtplib.SMTP(host=cls.link, port=cls.port) as server:
             server.starttls()
             server.ehlo()
-            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)  # TODO: take from console
+            server.login(os.environ['FROM_ADDR'], os.environ['FROM_PW'])
             message = cls.create_mail(data)
-            server.sendmail(EMAIL_ADDRESS, EMAIL_LIST, message)
+            server.sendmail(os.environ['FROM_ADDR'], os.environ['TO_ADDRS'].split(','), message)
 
     @classmethod
     def create_mail(cls, data):
