@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #doid_img {
+            width: 75%;
+            height: auto;
+            border: 1px solid black;
+        }
+
+        #outer {
+            background-image: url('https://background-tiles.com/overview/white/textures/large/5027.png');
+        }
+
+        .outer {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .header {
+            font-size: 26px;
+        }
+
+        .inner {
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body id="main">
+<table class="outer" id="outer">
+    <tr class="outer">
+        <th class="outer header">Image</th>
+        <th class="outer header">Details</th>
+    </tr>
+    {% for dotd in parsed_data %}
+    <tr class="outer">
+        <td class="outer"><img id=doid_img src="{{ dotd.image }}"></td>
+        <table class="inner">
+            <tr class="inner">
+                <th class="inner">Name</th>
+                <td class="inner">{{ dotd.name }}</td>
+            </tr>
+            <tr class="inner">
+                <th class="inner">Link</th>
+                <td class="inner"><a href="{{ dotd.link }}">Click Here!</a></td>
+            </tr>
+            <tr class="inner">
+                <th class="inner">Old Price</th>
+                <td class="inner">{{ dotd.old_price }}</td>
+            </tr>
+            <tr class="inner">
+                <th class="inner">Discount</th>
+                <td class="inner">{{ dotd.discount_amount }}</td>
+            </tr>
+            <tr class="inner">
+                <th class="inner">Current Price</th>
+                <td class="inner">{{ dotd.current_price }}</td>
+            </tr>
+            <tr class="inner">
+                <th class="inner">Bucket Value</th>
+                <td class="inner">{{ dotd.bucket_value }}</td>
+            </tr>
+        </table>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
